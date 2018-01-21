@@ -4,9 +4,238 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PurplePopManager"
+        xmlns:model="clr-namespace:PurplePopManager.Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="PurplePopManager" Height="700" Width="720" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+
+    </Window.Resources>
+
     <Grid>
-        
+        <TabControl HorizontalAlignment="Left" Height="671" VerticalAlignment="Top" Width="718">
+            <TabItem Header="클라이언트 현황">
+                <DockPanel>
+                    <ListView x:Name="ClientStatusView" Margin="5, 5, 5, 5">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="#" Width="25" DisplayMemberBinding="{Binding Path=Number}" />
+                                <GridViewColumn Header="IP" Width="100" DisplayMemberBinding="{Binding Path=Ip}" />
+                                <GridViewColumn Header="버전" Width="40" DisplayMemberBinding="{Binding Path=Version}" />
+                                <GridViewColumn Header="TCP 송신" Width="60" />
+                                <GridViewColumn Header="TCP 수신" Width="60" />
+                                <GridViewColumn Header="UDP 송신" Width="60" />
+                                <GridViewColumn Header="UDP 수신" Width="60" />
+                                <GridViewColumn Header="실행중인 게임" Width="120" />
+                                <GridViewColumn Header="과금중인 게임" Width="120" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="게임사 계정">
+                <WrapPanel Background="#FFF">
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="네오위즈" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="PmangOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="PmangHyperlink" RequestNavigate="PmangHyperlink_RequestNavigate" NavigateUri="http://pcbang.pmang.com">
+                                        http://pcbang.pmang.com
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="넥슨" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="NexonOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="NexonHyperlink" RequestNavigate="NexonHyperlink_RequestNavigate" NavigateUri="http://pcbang.nexon.com">
+                                        http://pcbang.nexon.com
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="넷마블" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="NetmarbleOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="NetmarbleHyperlink" RequestNavigate="NetmarbleHyperlink_RequestNavigate" NavigateUri="http://pcbang.netmarble.net">
+                                        http://pcbang.netmarble.net
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="다음" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="DaumOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="DaumHyperlink" RequestNavigate="DaumHyperlink_RequestNavigate" NavigateUri="http://www.daumpcbang.com">
+                                        http://www.daumpcbang.com
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="라이엇게임즈" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="LolOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="LolHyperlink" RequestNavigate="LolHyperlink_RequestNavigate" NavigateUri="http://pcbang.leagueoflegends.com">
+                                        http://pcbang.leagueoflegends.com
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="블리자드" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="BlizzardOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="BlizzardHyperlink" RequestNavigate="BlizzardHyperlink_RequestNavigate" NavigateUri="https://pcbang.blizzard.com/ko">
+                                        https://pcbang.blizzard.com/ko
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="엔씨소프트" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="NcOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="NcHyperlink" RequestNavigate="NcHyperlink_RequestNavigate" NavigateUri="http://pcbang.plaync.com">
+                                        http://pcbang.plaync.com
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="워게이밍" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="WargamingOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="WargamingHyperlink" RequestNavigate="WargamingHyperlink_RequestNavigate" NavigateUri="http://pcbang.wargaming.kr">
+                                        http://pcbang.wargaming.kr
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="웹젠" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="WebzenOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="WebzenHyperlink" RequestNavigate="WebzenHyperlink_RequestNavigate" NavigateUri="http://pcbang.wargaming.kr">
+                                        http://pcbang.wargaming.kr
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="위메이드" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="WemadeOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="WemadeHyperlink" RequestNavigate="WemadeHyperlink_RequestNavigate" NavigateUri="http://funpc.wemade.com/main">
+                                        http://funpc.wemade.com/main
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                    <WrapPanel HorizontalAlignment="Left" Height="128" VerticalAlignment="Top" Width="230">
+                        <GroupBox Header="한게임" Height="Auto" Width="230" VerticalContentAlignment="Stretch" VerticalAlignment="Top">
+                            <Grid Width="230">
+                                <Label Width="60" Height="26.497" Margin="3.833,2.498,166.167,74.005" Content="아이디" VerticalContentAlignment="Center" VerticalAlignment="Center" />
+                                <TextBox Height="20" Margin="60,8.998,53.667,77.001"/>
+                                <Label Width="60" Margin="3.833,31.996,166.167,48.504" Content="비밀번호"/>
+                                <PasswordBox Height="20" Margin="60,34.995,53.667,51.004"/>
+                                <TextBox Height="23" TextWrapping="Wrap" Text="접속상태" Margin="3.833,58.329,13.168,24.67" TextChanged="TextBox_TextChanged"/>
+                                <TextBlock x:Name="HanGameOpenLabel" Margin="3.833,84.61,0,0" HorizontalAlignment="Left" Height="18.005" Width="212.999" VerticalAlignment="Top" Cursor="Hand" Padding="0">
+                                    <Hyperlink Name="HanGameHyperlink" RequestNavigate="HanGameHyperlink_RequestNavigate" NavigateUri="http://pcbang.hangame.com">
+                                        http://pcbang.hangame.com
+                                    </Hyperlink>
+                                </TextBlock>
+                                <Button Content="저장" DockPanel.Dock="Right" Margin="181.333,8.998,13.168,51.005" />
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                </WrapPanel>
+            </TabItem>
+            <TabItem Header="설정">
+                <Grid Background="#FFF"/>
+            </TabItem>
+            <TabItem Header="씨디키 정보">
+                <Grid Background="#FFF"/>
+            </TabItem>
+            <TabItem Header="게임계정">
+                <Grid Background="#FFF"/>
+            </TabItem>
+            <TabItem Header="로그">
+                <Grid Background="#FFF"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
